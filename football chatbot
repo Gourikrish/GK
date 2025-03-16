@@ -1,0 +1,20 @@
+import gradio as gr
+import ollama
+
+# Define the chatbot function
+def football_chatbot(user_input):
+    # Call the TinyLlama model and get a response
+    response = ollama.chat(model="tinyllama", messages=[{"role": "user", "content": user_input}])
+    return response['message']
+
+# Create a Gradio interface
+iface = gr.Interface(
+    fn=football_chatbot, 
+    inputs="text", 
+    outputs="text", 
+    title="⚽ Football Chatbot",
+    description="Ask me anything about football! 🏆"
+)
+
+# Launch the chatbot
+iface.launch()
